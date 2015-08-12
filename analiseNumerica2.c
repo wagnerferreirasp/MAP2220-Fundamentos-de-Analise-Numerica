@@ -8,7 +8,7 @@ int main()
 {
     char *buf;
 
-    rl_bind_key('\t',rl_abort);//disable auto-complete
+    //rl_bind_key('\t',rl_abort);//disable auto-complete
 
     while((buf = readline("\n >> "))!=NULL)
     {
