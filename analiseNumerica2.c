@@ -23,7 +23,8 @@ int main()
             /*Spawn a child to run the program.*/
             pid_t pid = fork();
             if (pid==0) { /* child process */
-                execv("/bin/pwd",NULL);
+                const char* arg_v[] = {"/bin/pwd"};
+                execv("/bin/pwd", arg_v);
                 exit(127); /* only if execv fails */
             }
             else { /* pid!=0; parent process */
