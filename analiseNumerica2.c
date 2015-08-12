@@ -24,7 +24,7 @@ int main()
             pid_t pid = fork();
             if (pid==0) { /* child process */
                 static char *argv[] = {"/bin/pwd"};
-                execv("/bin/pwd", arg_v);
+                execv("/bin/pwd", argv);
                 exit(127); /* only if execv fails */
             }
             else { /* pid!=0; parent process */
