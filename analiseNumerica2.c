@@ -7,10 +7,10 @@
 int main()
 {
     char *buf;
-
-    //rl_bind_key('\t',rl_abort);//disable auto-complete
-
-    while((buf = readline("\n >> "))!=NULL)
+    char diretorio[1024];
+    rl_bind_key('\t',rl_abort);//disable auto-complete
+    char info[2048];
+    while((buf = readline(info))!=NULL)
     {
         if (strcmp(buf,"quit")==0)
             break;
@@ -19,6 +19,8 @@ int main()
 
         if (buf[0]!=0)
             add_history(buf);
+        getcwd(diretorio, sizeof(diretorio));
+        sprintf(info, "[%s] ", diretorio);
     }
 
     free(buf);
