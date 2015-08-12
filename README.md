@@ -1,2 +1,2 @@
-# MAP2220-Fundamentos-de-Analise-Numerica
+# MAP2220 Fundamentos de Análise Numérica
 Programas e simulações criados com o aprendizado em sala de aula.
