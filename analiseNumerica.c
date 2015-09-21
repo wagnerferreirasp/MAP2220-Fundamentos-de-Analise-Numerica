@@ -4,10 +4,10 @@
 
 /*******************************************************************************************************
  * Dicotomia                                                                                           */
-float a0, b0, x0, e0, casasPrecisao;
+float a0, b0, x0, e0, casasPrecisao, sinal0;
 // Função a encontrar a raiz
 float f(float x) {
-    return x * x * x + cosf(x);
+    return pow(2.71828182846f, x) - 4 * x;
 }
 // Função sgn usada no método da dicotomia
 float sgn(float ai, float xi) {
@@ -18,33 +18,34 @@ void recebeEntrada() {
     //printf("Digite dois números, indicando o intervalo em que provavelmente a raiz se encontra: ");
     //scanf("%f", &a0);
     //scanf("%f", &b0);
-    a0 = -1;
-    b0 = -0.75;
+    a0 = 2;
+    b0 = 3;
     x0 = (a0 + b0) / 2;
     e0 = fabs(x0 - a0);
+    sinal0 = sgn(a0, x0);
     casasPrecisao = 4;
     //printf("%f %f %f %f\n", a0, b0, x0, e0);
 }
 // Método da dicotomia (completo e com precisão)
 float dicotomia() {
     recebeEntrada();
-    float sinal;
-    printf("ai          bi       xi       ei       sgn\n");
+    printf("ai\t\t\tbi\t\t\txi\t\t\tei\t\t\tsgn\n");
     if (casasPrecisao > 6) casasPrecisao = 6;
     float precisao = pow(10, -casasPrecisao);
     float ai = a0, bi = b0, xi = x0, ei = e0;
+    float sinal = sinal0;
     while (ei > precisao) {
-        sinal = sgn(ai, xi);
-        if (sinal > 0) {
-           ai = xi;
-        } else {
-            bi = xi;
-        }
+    	if (sinal < 0) {
+			printf("%f\t%f\t%f\t%f\t-\n", ai, bi, xi, ei);
+			bi = xi;
+    	}
+    	else {
+    		printf("%f\t%f\t%f\t%f\t+\n", ai, bi, xi, ei);
+    		ai = xi;
+    	}
         xi = (ai + bi)/2.0;
         ei = fabs(xi - ai);
-        if (sinal < 0)
-            printf("%f %f %f %f -\n", ai, bi, xi, ei);
-        else printf("%f %f %f %f +\n", ai, bi, xi, ei);
+        sinal = sgn(ai, xi);
     }
     return xi;
 }
